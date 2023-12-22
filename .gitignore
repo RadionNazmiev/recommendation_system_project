@@ -6,3 +6,4 @@ db_app\.ipynb_checkpoints
 db_app\__pycache__
 .idea
 test.py
+.env

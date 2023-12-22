@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, TIMESTAMP, PrimaryKeyConstraint
 from sqlalchemy.orm import relationship, composite
-from database import Base, engine, SessionLocal
+
+from database.database import Base, engine, SessionLocal
+
 
 class Post(Base):
     __tablename__ = "post_text_df"
@@ -9,7 +11,8 @@ class Post(Base):
     id = Column(Integer, primary_key=True, name="post_id")
     text = Column(String)
     topic = Column(String)
-       
+
+
 class User(Base):
     __tablename__ = "user_data"
     __table_args__ = {"schema": "public"}
@@ -22,7 +25,8 @@ class User(Base):
     gender = Column(Integer)
     os = Column(String)
     source = Column(String)
-     
+
+
 class Feed(Base):
     __tablename__ = "feed_data"
     __table_args__ = (

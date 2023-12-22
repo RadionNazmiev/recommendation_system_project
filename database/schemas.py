@@ -1,6 +1,8 @@
-from pydantic import BaseModel
 import datetime
 from typing import Optional
+
+from pydantic import BaseModel
+
 
 class GetPost(BaseModel):
     id: int
@@ -25,12 +27,14 @@ class GetUser(BaseModel):
 
 class GetFeed(BaseModel):
     user_id: int
-    user: GetUser
     post_id: int
+
+    user: GetUser
     post: GetPost
-    timestamp: datetime.datetime
+
     action: str
-    target: Optional[int] = None
+    timestamp: datetime.datetime
+    # target: Optional[int] = None
 
     class Config:
         orm_mode = True

@@ -4,3 +4,5 @@ __pycache__
 rec_sys
 db_app\.ipynb_checkpoints
 db_app\__pycache__
+.idea
+test.py

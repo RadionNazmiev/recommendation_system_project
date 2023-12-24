@@ -2,8 +2,9 @@ __pycache__
 .vscode
 .ipynb_checkpoints
 rec_sys
-db_app\.ipynb_checkpoints
-db_app\__pycache__
+database\__pycache__
 .idea
 test.py
+tables
+catboost_info
 .env

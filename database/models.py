@@ -40,17 +40,12 @@ class Feed(Base):
     post = relationship("Post")
     timestamp = Column(TIMESTAMP)
     action = Column(String)
-    target = Column(Integer) 
+    target = Column(Integer, nullable=True) 
 
  
 if __name__ == "__main__":
-    # Base.metadata.create_all(engine)
-    session = SessionLocal()
-    results = (
-        session.query(Feed).join(User).filter(User.age == 25).limit(5).all()
-    )
-    for x in results:
-        print(f"name = {x.user.age}, city = {x.user.city}, timestamp = {x.timestamp}")
+    pass
+
         
 
 

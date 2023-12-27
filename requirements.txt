@@ -1,6 +1,6 @@
 fastapi==0.75.1
 pydantic==1.9.1
-pandas==1.4.2
+pandas==1.5.0
 sqlalchemy==1.4.35
 requests==2.27.1
 catboost==1.0.6
@@ -23,3 +23,4 @@ statsmodels==0.12.2
 lightfm==1.16
 python-dotenv==0.20.0
 nltk==3.8.1
+fastparquet==2023.10.1

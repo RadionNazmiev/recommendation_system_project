@@ -1,0 +1,7 @@
+TRAIN_SET_TYPES:
+  gender: int64
+
+TRAIN_SET_FEATURES:
+  - gender
+  - age
+  - country

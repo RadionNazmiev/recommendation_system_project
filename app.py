@@ -178,7 +178,7 @@ def _get_recommended_feed(user_id: int, time: datetime, limit: int) -> List[GetP
     predicts = model.predict_proba(valid_set)[:, 1]
     valid_set["like_proba"] = predicts
 
-    valid_set.to_parquet("data/valid_set.parquet")
+    valid_set.to_parquet(os.path.join("data", "valid_set.parquet"))
     
     logger.info("Deleting liked posts")
     liked_posts = feeds[feeds.user_id == user_id]['post_id']

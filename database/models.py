@@ -4,13 +4,6 @@ from sqlalchemy.orm import relationship, composite
 from database.database import Base, engine, SessionLocal
 
 
-def get_original_column(class_, column_name):
-    mapper = inspect(class_)
-    for column in mapper.columns:
-        if column.key == column_name:
-            return column
-    return None
-
 class Post(Base):
     __tablename__ = "post_text_df"
     __table_args__ = {"schema": "public"}
@@ -55,6 +48,7 @@ class ProcessedPost(Base):
     __table_args__ = {"schema": "public"}
     
     id = Column(Integer, primary_key=True, name="post_id")
+    text = Column(String)
     topic = Column(String)
     total_tfidf = Column(Float, name="TotalTfIdf")
     max_tfidf = Column(Float, name="MaxTfIdf")
@@ -82,15 +76,6 @@ class ProcessedPost(Base):
     dist_to_20st = Column(Float, name="DistanceTo20thCluster")
 
     
-if __name__ == "__main__":
-    post_text_column = get_original_column(Post, 'text')
-    
-    if post_text_column:
-        print(f"Column '{post_text_column.key}' found in class '{Post.__name__}'.")
-        print(f"Column type: {post_text_column.type}")
-    else:
-        print(f"Column not found in class '{Post.__name__}'.")
-
         
 
 

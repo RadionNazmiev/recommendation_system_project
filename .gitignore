@@ -1,10 +1,8 @@
 __pycache__
 .vscode
 .ipynb_checkpoints
-rec_sys
+venv
 database\__pycache__
-ML_Final_Project
-New folder
 data
 .idea
 test.py

@@ -14,6 +14,7 @@ class GetPost(BaseModel):
 
 class GetProcessedPost(BaseModel):
     id : int
+    text: str
     topic : str
     total_tfidf : float
     max_tfidf : float

@@ -73,7 +73,7 @@ def _get_distinct_liked_posts(db: Session) -> List[Feed]:
         .filter(Feed.action == "like")
         .group_by(Feed.post_id, Feed.user_id)
     )
-    liked_posts = _get_results_in_chunks(query, 10000)
+    liked_posts = _get_results_in_chunks(query,)
     liked_posts = [
         Feed(**{key: value for key, value in post._asdict().items()})
         for post in liked_posts
@@ -92,7 +92,7 @@ def _load_features() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
     try:
         db = SessionLocal()
         logger.info("Loading posts")
-        posts = _get_processed_posts(db)
+        posts = _get_processed_posts(db)     
         POSTS_COLUMNS = load_config(CONFIG_PATH).get("POSTS_COLUMNS")
         posts = pd.DataFrame([vars(post) for post in posts], columns=POSTS_COLUMNS)
         posts.to_parquet(posts_path)
@@ -168,12 +168,9 @@ def _get_recommended_feed(user_id: int, time: datetime, limit: int) -> List[GetP
     ]
 
 
-
 @app.get("/")
 def check_status():
     return {"Status": "Ok"}
-
-app = FastAPI()
 
 @app.get("/post/recommendations", response_model=List[GetPost])
 def get_recommended_posts(

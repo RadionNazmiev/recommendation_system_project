@@ -15,12 +15,3 @@ URL = f"postgresql://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}"
 engine = create_engine(URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
-
-
-if __name__ == "__main__":
-    from config.utils import load_config
-    d = load_config(os.path.join("config", "config.yaml"))
-    print(d)
-    print(PG_USER)
-
-

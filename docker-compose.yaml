@@ -9,10 +9,14 @@ services:
       - PG_DATABASE=startml
       - PG_USER=robot-startml-ro
       - PG_PASS=pheiph0hahj1Vaif
+      - PG_TEST_USER=postgres
+      - PG_TEST_PASS=postgres
+      - PG_TEST_HOST=postgres_db
+      - PG_TEST_PORT=5432
     ports:
       - "8000:8000"
-    command: sh -c "uvicorn app:app --reload --port=8000 --host=0.0.0.0"
-    # command: ["tail", "-f", "dev/null"]
+    # command: sh -c "uvicorn app:app --reload --port=8000 --host=0.0.0.0"
+    command: ["tail", "-f", "/dev/null"]
   postgres_db:
     image: postgres
     environment:

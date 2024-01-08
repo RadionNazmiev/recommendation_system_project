@@ -10,3 +10,4 @@ tables
 catboost_info
 .env
 db
+data

@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    build: ./api/
+    build: .
     environment:
       - PG_HOST=postgres.lab.karpov.courses
       - PG_PORT=6432
@@ -12,18 +12,13 @@ services:
     ports:
       - "8000:8000"
     command: sh -c "uvicorn app:app --reload --port=8000 --host=0.0.0.0"
-  db:
-    image: postgres:16-alpine
-    restart: always
+    # command: ["tail", "-f", "dev/null"]
+  postgres_db:
+    image: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgres-data:/var/lib/postgresql/data
-      - ./db/init_data:/init_data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
-
-volumes:
-  postgres-data:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

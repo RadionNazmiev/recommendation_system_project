@@ -71,9 +71,11 @@ def _get_distinct_liked_posts(db: Session) -> List[Feed]:
     query = (
         db.query(Feed.post_id, Feed.user_id)
         .filter(Feed.action == "like")
-        .group_by(Feed.post_id, Feed.user_id)
+        .group_by(Feed.post_id, Feed.user_id).limit(1)
     )
-    liked_posts = _get_results_in_chunks(query,)
+    # liked_posts = _get_results_in_chunks(query,)
+    liked_posts = query.all()
+    print(liked_posts, file=open("liked_posts.txt", "w"))
     liked_posts = [
         Feed(**{key: value for key, value in post._asdict().items()})
         for post in liked_posts

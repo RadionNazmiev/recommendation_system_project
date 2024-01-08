@@ -9,3 +9,4 @@ test.py
 tables
 catboost_info
 .env
+db

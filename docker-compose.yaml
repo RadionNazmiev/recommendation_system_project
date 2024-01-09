@@ -1,28 +1,34 @@
 version: '3.8'
 
 services:
-  web:
+  api:
+    container_name: api
     build: .
     environment:
-      - PG_HOST=postgres.lab.karpov.courses
-      - PG_PORT=6432
-      - PG_DATABASE=startml
-      - PG_USER=robot-startml-ro
-      - PG_PASS=pheiph0hahj1Vaif
-      - PG_TEST_USER=postgres
-      - PG_TEST_PASS=postgres
-      - PG_TEST_HOST=postgres_db
-      - PG_TEST_PORT=5432
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT}
+      - PG_DB=${PG_DB}
+      - PG_USER=${PG_USER}
+      - PG_PASS=${PG_PASS}
     ports:
-      - "8000:8000"
-    # command: sh -c "uvicorn app:app --reload --port=8000 --host=0.0.0.0"
-    command: ["tail", "-f", "/dev/null"]
-  postgres_db:
-    image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5432:5432"
+      - ${API_PORT}:8000
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - .:/app
+    # command: ["/app/wait-for-it.sh", "postgres_db:5432", "--", "/app/entrypoint.sh"]
+    # command: ["tail", "-f", "/dev/null"]
+    command: ["bash", "entrypoint.sh"]
+    # command: ""
+  postgres_db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=${PG_DB}
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASS}
+    ports:
+      - ${PG_PORT}:5432
+    volumes:
+      # - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init_data:/init_data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: postgres -c work_mem=1GB -c maintenance_work_mem=1GB -c max_wal_size=4GB
+

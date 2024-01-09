@@ -11,3 +11,7 @@ catboost_info
 .env
 db
 data
+init_data
+feeds.parquet
+posts.parquet
+users.parquet

@@ -6,10 +6,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from loguru import logger
 
-from config.config import PG_USER, PG_PASS, PG_HOST, PG_PORT, PG_DATABASE
+from config.config import PG_USER, PG_PASS, PG_HOST, PG_PORT, PG_DB
 
 
-URL = f"postgresql://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DATABASE}"
+URL = f"postgresql://{PG_USER}:{PG_PASS}@{PG_HOST}:{PG_PORT}/{PG_DB}"
 
 
 engine = create_engine(URL)

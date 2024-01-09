@@ -10,7 +10,7 @@ import pyarrow.parquet as pq
 from sqlalchemy.orm import Session
 
 from config.utils import load_config
-from database.database import SessionLocal
+from database.database import SessionLocal, URL
 from database.models import User, Post, Feed, ProcessedPost
 from database.schemas import GetPost, GetUser, GetFeed, GetProcessedPost
 
@@ -18,6 +18,7 @@ CONFIG_PATH = os.path.join("config", "config.yaml")
 
 app = FastAPI()
 
+logger.info(f"URL is {URL}")
 def _get_db():
     try:
         with SessionLocal() as db:
@@ -71,11 +72,9 @@ def _get_distinct_liked_posts(db: Session) -> List[Feed]:
     query = (
         db.query(Feed.post_id, Feed.user_id)
         .filter(Feed.action == "like")
-        .group_by(Feed.post_id, Feed.user_id).limit(1)
+        .group_by(Feed.post_id, Feed.user_id)
     )
-    # liked_posts = _get_results_in_chunks(query,)
-    liked_posts = query.all()
-    print(liked_posts, file=open("liked_posts.txt", "w"))
+    liked_posts = _get_results_in_chunks(query,)
     liked_posts = [
         Feed(**{key: value for key, value in post._asdict().items()})
         for post in liked_posts
@@ -116,9 +115,9 @@ def _load_features() -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 logger.info("Loading features")
-feeds_path = os.path.join("data", "feeds.parquet")
-posts_path = os.path.join("data", "posts.parquet")
-users_path = os.path.join("data", "users.parquet")
+feeds_path = os.path.join("postgres", "feeds.parquet")
+posts_path = os.path.join("postgres", "posts.parquet")
+users_path = os.path.join("postgres", "users.parquet")
 
 try:
     feeds = pd.read_parquet(feeds_path)

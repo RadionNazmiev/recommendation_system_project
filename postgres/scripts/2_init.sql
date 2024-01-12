@@ -1,6 +1,5 @@
 SET search_path TO public;
 
--- Creation of users table
 CREATE TABLE IF NOT EXISTS public.users (
   id INT NOT NULL,
   gender SMALLINT NOT NULL,
@@ -12,14 +11,12 @@ CREATE TABLE IF NOT EXISTS public.users (
   source VARCHAR(15)
 );
 
--- Creation of posts table
 CREATE TABLE IF NOT EXISTS public.posts (
   id SMALLINT NOT NULL,
   text TEXT NOT NULL,
   topic VARCHAR(50) NOT NULL
 );
 
--- Creation of feeds table
 CREATE TABLE IF NOT EXISTS public.feeds (
   timestamp TIMESTAMP NOT NULL,
   user_id INT NOT NULL,
@@ -28,7 +25,6 @@ CREATE TABLE IF NOT EXISTS public.feeds (
   target SMALLINT
 );
 
--- Creation of processed_posts table
 CREATE TABLE IF NOT EXISTS public.processed_posts (
   id SMALLINT NOT NULL,
   text TEXT,
@@ -60,9 +56,8 @@ CREATE TABLE IF NOT EXISTS public.processed_posts (
 );
 
 
-COPY public.users FROM '/init_data/users.csv' WITH (FORMAT CSV, HEADER);
-COPY public.posts FROM '/init_data/posts.csv' WITH (FORMAT CSV, HEADER);
-COPY public.processed_posts FROM '/init_data/processed_posts.csv'
-WITH (FORMAT CSV, HEADER); 
-COPY public.feeds FROM '/init_data/feeds.csv' WITH (FORMAT CSV, HEADER);
+COPY public.feeds FROM '/var/lib/postgresql/data/feeds.csv' WITH (FORMAT CSV, HEADER);
+COPY public.processed_posts FROM '/var/lib/postgresql/data/processed_posts.csv' WITH (FORMAT CSV, HEADER);
+COPY public.users (id, gender, age, country, city, exp_group, os, source) FROM '/var/lib/postgresql/data/users.csv' WITH (FORMAT CSV, HEADER);
+COPY public.posts (id, text, topic) FROM '/var/lib/postgresql/data/posts.csv' WITH (FORMAT CSV, HEADER);
 

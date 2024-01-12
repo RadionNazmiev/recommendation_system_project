@@ -4,4 +4,3 @@ __pycache__
 .ipynb_checkpoints
 model.ipynb
 catboost_info
-test.py

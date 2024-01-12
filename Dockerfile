@@ -9,7 +9,7 @@ RUN python -m pip install --upgrade pip \
 
 COPY . .
 
-RUN chmod +x /app/entrypoint.sh
+RUN chmod +x /app/api_entrypoint.sh
 
 EXPOSE 8000
 

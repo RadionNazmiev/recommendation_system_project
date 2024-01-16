@@ -8,9 +8,6 @@ TRAIN_SET_TYPES:
   source: O
   text: O
   topic: O
-  TotalTfIdf: float64
-  MaxTfIdf: float64
-  MeanTfIdf: float64
   TextCluster: int32
   DistanceTo1thCluster: float64
   DistanceTo2thCluster: float64
@@ -36,9 +33,6 @@ TRAIN_SET_TYPES:
   month: int64
 
 COLUMN_MAPPING:
-  total_tfidf: TotalTfIdf
-  max_tfidf: MaxTfIdf
-  mean_tfidf: MeanTfIdf
   text_cluster: TextCluster
   dist_to_1st: DistanceTo1thCluster
   dist_to_2st: DistanceTo2thCluster
@@ -71,9 +65,6 @@ TRAIN_SET_FEATURES:
   - source 
   - text
   - topic 
-  - TotalTfIdf 
-  - MaxTfIdf 
-  - MeanTfIdf 
   - TextCluster 
   - DistanceTo1thCluster 
   - DistanceTo2thCluster 
@@ -102,9 +93,6 @@ POSTS_COLUMNS:
   - id
   - text
   - topic
-  - total_tfidf
-  - max_tfidf
-  - mean_tfidf
   - text_cluster
   - dist_to_1st
   - dist_to_2st

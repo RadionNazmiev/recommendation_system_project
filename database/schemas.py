@@ -16,9 +16,6 @@ class GetProcessedPost(BaseModel):
     id : int
     text: str
     topic : str
-    total_tfidf : float
-    max_tfidf : float
-    mean_tfidf : float
     text_cluster : int
     dist_to_1st : float
     dist_to_2st : float

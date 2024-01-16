@@ -3,7 +3,7 @@ __pycache__
 .ipynb_checkpoints
 venv
 database\__pycache__
-data
+
 .idea
 test.py
 tables
